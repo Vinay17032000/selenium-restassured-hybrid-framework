@@ -12,13 +12,13 @@ src
 ├── main/java/com/framework
 │   ├── config        ConfigReader (properties file with -D overrides)
 │   ├── driver        ThreadLocal WebDriver setup and teardown
+│   ├── reporting     Thread-safe ExtentManager used by pages and tests
 │   ├── pages         Page objects (BasePage holds the explicit waits)
 │   └── api/models    Request/response POJOs
 └── test
     ├── java/com/framework
     │   ├── base      BaseUiTest and BaseApiTest
     │   ├── listeners TestListener (Extent logging, failure screenshots)
-    │   ├── reports   Thread-safe ExtentManager
     │   ├── ui        Login, cart and checkout tests
     │   └── api       Token, create booking and booking flow tests
     └── resources

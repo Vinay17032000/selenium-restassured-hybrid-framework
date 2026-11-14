@@ -4,8 +4,10 @@ import com.framework.api.models.AuthRequest;
 import com.framework.api.models.Booking;
 import com.framework.api.models.BookingDates;
 import com.framework.config.ConfigReader;
+import com.framework.reporting.ExtentManager;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
 
@@ -21,6 +23,12 @@ public abstract class BaseApiTest {
                 .setBaseUri(ConfigReader.get("api.base.url"))
                 .setContentType(ContentType.JSON)
                 .setAccept("application/json")
+                .addFilter((request, response, context) -> {
+                    Response result = context.next(request, response);
+                    ExtentManager.log(request.getMethod() + " " + request.getURI() + " -> "
+                            + result.getStatusCode() + " (" + result.getTime() + " ms)");
+                    return result;
+                })
                 .build();
     }
 

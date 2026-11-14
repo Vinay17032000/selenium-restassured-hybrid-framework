@@ -1,5 +1,6 @@
 package com.framework.pages;
 
+import com.framework.reporting.ExtentManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -27,12 +28,15 @@ public abstract class BasePage {
 
     protected void click(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        ExtentManager.log("Clicked " + locator);
     }
 
     protected void type(By locator, String text) {
         WebElement element = visible(locator);
         element.clear();
         element.sendKeys(text);
+        boolean sensitive = "password".equals(element.getAttribute("type"));
+        ExtentManager.log("Entered " + (sensitive ? "******" : "'" + text + "'") + " in " + locator);
     }
 
     protected List<String> textsOf(By locator) {

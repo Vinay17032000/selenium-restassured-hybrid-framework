@@ -2,7 +2,7 @@ package com.framework.listeners;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.framework.driver.DriverManager;
-import com.framework.reports.ExtentManager;
+import com.framework.reporting.ExtentManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;

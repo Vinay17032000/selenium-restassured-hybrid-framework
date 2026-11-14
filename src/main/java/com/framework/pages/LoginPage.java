@@ -1,6 +1,7 @@
 package com.framework.pages;
 
 import com.framework.config.ConfigReader;
+import com.framework.reporting.ExtentManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,7 +17,9 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage open() {
-        driver.get(ConfigReader.get("ui.base.url"));
+        String url = ConfigReader.get("ui.base.url");
+        driver.get(url);
+        ExtentManager.log("Opened " + url);
         return this;
     }
 
