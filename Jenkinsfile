@@ -29,6 +29,14 @@ pipeline {
         always {
             junit 'target/surefire-reports/*.xml'
             archiveArtifacts artifacts: 'target/surefire-reports/**, target/extent-report.html', allowEmptyArchive: true
+            publishHTML target: [
+                reportDir: 'target',
+                reportFiles: 'extent-report.html',
+                reportName: 'Extent Report',
+                keepAll: true,
+                alwaysLinkToLastBuild: true,
+                allowMissing: true
+            ]
         }
     }
 }
