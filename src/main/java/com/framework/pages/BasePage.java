@@ -28,7 +28,7 @@ public abstract class BasePage {
 
     protected void click(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
-        ExtentManager.log("Clicked " + locator);
+        ExtentManager.log("Clicked " + label(locator));
     }
 
     protected void type(By locator, String text) {
@@ -36,7 +36,7 @@ public abstract class BasePage {
         element.clear();
         element.sendKeys(text);
         boolean sensitive = "password".equals(element.getAttribute("type"));
-        ExtentManager.log("Entered " + (sensitive ? "******" : "'" + text + "'") + " in " + locator);
+        ExtentManager.log("Entered " + (sensitive ? "******" : "'" + text + "'") + " in " + label(locator));
     }
 
     protected List<String> textsOf(By locator) {
@@ -48,5 +48,10 @@ public abstract class BasePage {
 
     protected String textOf(By locator) {
         return visible(locator).getText();
+    }
+
+    private String label(By locator) {
+        String value = locator.toString().replaceFirst("^By\\.\\w+:\\s*", "");
+        return value.replaceAll("[^A-Za-z0-9]+", " ").trim();
     }
 }
